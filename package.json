@@ -1,0 +1,29 @@
+{
+  "name": "eula",
+  "version": "1.0.0",
+  "description": "Whatsapp BOT menggunakan NodeJS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "whatsapp-bot",
+    "whatsapp-webjs",
+    "anime-bot"
+  ],
+  "author": "AzzharAli",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.2.2",
+    "buffer": "^6.0.3",
+    "cheerio": "^1.0.0-rc.12",
+    "fs": "^0.0.1-security",
+    "instagram-url-direct": "^1.0.13",
+    "qrcode-terminal": "^0.12.0",
+    "qs": "^6.11.0",
+    "request": "^2.88.2",
+    "systeminformation": "^5.16.9",
+    "whatsapp-web.js": "github:pedroslopez/whatsapp-web.js#fix-buttons-list",
+    "ytdl-core": "^4.11.2"
+  }
+}
