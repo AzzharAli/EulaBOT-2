@@ -8,11 +8,11 @@ const userHandle = require("./user/user-handle.js");
 const registerSessionHandle = require("./user/register-session-handle.js");
 const menfessSessionHandle = require("./fitur/menfess/menfess-session-handle.js");
 const {menfessMessageHandle} = require("./fitur/menfess/menfess-message-handle");
-const {eula} = require('./eula');
+const {eulaLawrence} = require('./eula');
 const {ayaka} = require('./ayaka');
 const {messageMain,logchat} = require("./log/log");
 
-const client = new Client({
+const eula = new Client({
     puppeteer: {
         executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe',
         //headless:false
@@ -24,30 +24,30 @@ const client = new Client({
 });
 
 
-client.on('qr', qr => {
+eula.on('qr', qr => {
     console.log('Scan QR Code');
     qrcode.generate(qr, {small: true});
 });
 
-client.on('authenticated', () => {
+eula.on('authenticated', () => {
     console.log('log : Autentikasi '+ namaBot+' Berhasil');
 });
 
-client.on('ready', () => {
+eula.on('ready', () => {
     console.log('log : '+namaBot+' siap Dipakai!');
-    messageMain(client,namaBot+" Diaktifkan di "+client.info.wid.user+" dengan nama "+client.info.pushname+", \n\n*Siap Menerima Pesan!*");
+    messageMain(eula,namaBot+" Diaktifkan di "+eula.info.wid.user+" dengan nama "+eula.info.pushname+", \n\n*Siap Menerima Pesan!*");
 });
 
-client.initialize();
+eula.initialize();
 
-client.on('incoming_call', async call => {
+eula.on('incoming_call', async call => {
     const media = await MessageMedia.fromUrl(botCallImgUrl);
-    client.sendMessage(call.from, media, {caption : botCall});
+    eula.sendMessage(call.from, media, {caption : botCall});
     console.log('log : Ada yang nelpon woi');
     
 });
 
-client.on('message', async message => {
+eula.on('message', async message => {
     const kontak = await message.getContact();
     const nomor = kontak.number;
     const userRegisteredStatus = await userHandle.cekUser(nomor);
@@ -63,32 +63,32 @@ client.on('message', async message => {
     const ayakawangi = isiPesan.split(" ").slice(1).toString().replaceAll(","," ");
     let isGroup;
     if(message.from.includes('@g.us')){isGroup = true;}else{isGroup = false;}
-    let gr=false;if(isGroup == true){gr = chat.name;}await logchat(client, nomor, kontak.pushname, gr, isiPesan);
+    let gr=false;if(isGroup == true){gr = chat.name;}await logchat(eula, nomor, kontak.pushname, gr, isiPesan);
     if(userRegisteredStatus != false){
         if(menfessPengirim != false){
-            if(isGroup == false){menfessMessageHandle(client, message, "pengirim");}
+            if(isGroup == false){menfessMessageHandle(eula, message, "pengirim");}
         }else if(menfessPenerima != false){
-            if(isGroup == false){menfessMessageHandle(client, message, "penerima");}
+            if(isGroup == false){menfessMessageHandle(eula, message, "penerima");}
         }else{
             if(Array.from(isiPesan)[0] == trigger){
                 if(banned == false){
-                    eula(client, message);
+                    eulaLawrence(eula, message);
                 }else{
                     chat.sendMessage("*"+namaBot+"*\nMohon Maaf, Nomor anda telah di banned!\nHubungi Admin di 6285608689687 untuk Info lebih lanjut.");
                 }
             }else{
-                ayaka(client, message);
+                ayaka(eula, message);
             }
         }
     }else{
         if(menfessPengirim != false){
-            if(isGroup == false){menfessMessageHandle(client, message, "pengirim");}else{message.reply("*"+namaBot+"*\n\nAnda sedang dalam sesi ")}
+            if(isGroup == false){menfessMessageHandle(eula, message, "pengirim");}else{message.reply("*"+namaBot+"*\n\nAnda sedang dalam sesi ")}
         }else if(menfessPenerima != false){
-            if(isGroup == false){menfessMessageHandle(client, message, "penerima");}
+            if(isGroup == false){menfessMessageHandle(eula, message, "penerima");}
         }else{
             if(Array.from(isiPesan)[0] == trigger){
                 if(isiPesanLower == trigger+"register" || isiPesanLower == trigger+"kenalan"){
-                    kenalan(client, message);
+                    kenalan(eula, message);
                 }else{
                     let button = new Buttons("Kamu belum melakukan registrasi nomor!, jika merasa sudah registrasi mungkin data yang anda masukkan tidak valid",[{body:trigger+'register'}],namaBot,"Tekan "+trigger+"register untuk memulai registrasi");
                     chat.sendMessage(button);
@@ -96,9 +96,9 @@ client.on('message', async message => {
             }else{
                const cekSessionRegister = await registerSessionHandle.returnDataUser(nomor);
                if(cekSessionRegister != false){
-                    kenalan(client, message);
+                    kenalan(eula, message);
                }else{
-                    ayaka(client, message);
+                    ayaka(eula, message);
                } 
             }
         }

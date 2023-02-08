@@ -1,4 +1,4 @@
-const ayaka = async(client,message) => {
+const ayaka = async(eula,message) => {
     const chat = await message.getChat();
     const isiPesan = (message.body);
     const isiPesanLower = isiPesan.toLowerCase();

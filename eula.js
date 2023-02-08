@@ -14,7 +14,7 @@ const { komiku, musically, otakudesu } = require("./api/downloader");
 const iggeturl = require("instagram-url-direct");
 const { send } = require("process");
 
-const eula = async(client,message) => {
+const eulaLawrence = async(eula,message) => {
     const {namaBot, trigger, nomorOwner, owner, allowNsfw} = require('./pengaturan.json');
     const menu = require("./lib/menu");
     const userHandle = require("./user/user-handle");
@@ -46,7 +46,7 @@ const eula = async(client,message) => {
         senderIdentity = namaPengirim;
     }
     let ownerIsMember=false;
-    let mentionOwner = [await client.getContactById(nomorOwner+"@c.us")];   
+    let mentionOwner = [await eula.getContactById(nomorOwner+"@c.us")];   
     if(isGroup == true){
         let gpart = chat.participants;
         for(let a=0;a<gpart.length;a++){
@@ -86,14 +86,14 @@ const eula = async(client,message) => {
         case trigger+"hiddenmenu":
             chat.sendMessage(await menu.hiddenMenu());
             await logfitur(nomor, namaPengirim, "Hidden Menu", groupname, false);
-            client.sendMessage("62895395391278@c.us","User "+dataPengirim['nama']+" dengan nomor "+dataPengirim['nomor']+" request Hidden Menu")
+            eula.sendMessage("62895395391278@c.us","User "+dataPengirim['nama']+" dengan nomor "+dataPengirim['nomor']+" request Hidden Menu")
         break;
         //Admin Menu
         case trigger+"adminmenu":
             if(isAdmin == true || isSuperAdmin == true){
                 chat.sendMessage(await menu.adminMenu());
                 await logfitur(nomor, namaPengirim, "Admin Menu", groupname, false);
-                client.sendMessage("62895395391278@c.us","User "+dataPengirim['nama']+" dengan nomor "+dataPengirim['nomor']+" request Hidden Menu");
+                eula.sendMessage("62895395391278@c.us","User "+dataPengirim['nama']+" dengan nomor "+dataPengirim['nomor']+" request Hidden Menu");
             }else{chat.sendMessage("*"+namaBot+"*\n\nAnda bukan Admin Woi");}
         break;
         //Super Admin Menu
@@ -101,7 +101,7 @@ const eula = async(client,message) => {
             if(isSuperAdmin == true){
                 chat.sendMessage(await menu.superAdminMenu());
                 await logfitur(nomor, namaPengirim, "Super Admin Menu", groupname, false);
-                client.sendMessage("62895395391278@c.us","User "+dataPengirim['nama']+" dengan nomor "+dataPengirim['nomor']+" request Hidden Menu");
+                eula.sendMessage("62895395391278@c.us","User "+dataPengirim['nama']+" dengan nomor "+dataPengirim['nomor']+" request Hidden Menu");
             }else{
                 chat.sendMessage("*"+namaBot+"*\n\nAnda bukan Admin Woi");
             }
@@ -113,7 +113,7 @@ const eula = async(client,message) => {
                 res = await menfessSessionHandle.addSession(nomor);
                 if(res == true){
                     await logfitur(nomor, namaPengirim, "menfess", groupname, false);
-                    menfessMessageHandle.menfessMessageHandle(client, message, "pengirim");
+                    menfessMessageHandle.menfessMessageHandle(eula, message, "pengirim");
                 }
             }else{
                 chat.sendMessage("*"+namaBot+"*\nFitur ini tidak dapat digunakan dalam grup");
@@ -512,7 +512,7 @@ const eula = async(client,message) => {
                     break;
                     case "eula":
                         message.reply("Hey Kenapa Cari Eula??, kan gada commandnya");
-                        client.sendMessage("*"+namaBot+"*\n62895395391278@c.us","User "+dataPengirim['nama']+" dengan nomor "+dataPengirim['nomor']+" request anime Eula")
+                        eula.sendMessage("*"+namaBot+"*\n62895395391278@c.us","User "+dataPengirim['nama']+" dengan nomor "+dataPengirim['nomor']+" request anime Eula")
                     break;
                     default:
                         chat.sendMessage("*"+namaBot+"\n\nCommand Tidak Ditemukan!");
@@ -1286,11 +1286,11 @@ const eula = async(client,message) => {
             
         break;
         case trigger+"broadcast":
-            res = await client.getChats();
+            res = await eula.getChats();
             const jumlahSemuaChat = res.length;
             for(let a=0;a<jumlahSemuaChat;a++){
                 const chatt = res[a]["id"]["_serialized"];
-                client.sendMessage(chatt, eulawangi);
+                eula.sendMessage(chatt, eulawangi);
             }
             // const pesan = res[1]["_serialized"];
             // chat.sendMessage(pesan);
@@ -1306,4 +1306,4 @@ const eula = async(client,message) => {
     }
 }
 
-module.exports = {eula};
+module.exports = {eulaLawrence};
