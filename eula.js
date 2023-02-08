@@ -588,7 +588,7 @@ const eula = async(client,message) => {
                 res = await anime.danbooruE("azur_lane");
                 if(res != false){
                     chat.sendMessage(await MessageMedia.fromUrl(res.link),{caption:"*Character* : "+res.character});
-                    await logfitur(nomor, namaPengirim, "genshin nsfw", groupname, res.link);
+                    await logfitur(nomor, namaPengirim, "azurlane nsfw", groupname, res.link);
                     if(res.character.includes("eula") && isGroup == true && ownerIsMember == true){
                         chat.sendMessage("nih buat @"+nomorOwner,{mentions:mentionOwner})
                     }
