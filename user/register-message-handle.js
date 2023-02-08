@@ -30,7 +30,7 @@
 
         if(statusNama == false){
             if(statusAmbilData == false){
-                message.reply("Perkenanlkan Saya "+namaBot+", Nama kamu siapa? langsung tulis aja yah gausah pake tanda '"+trigger+"'");
+                message.reply("Perkenalkan Saya "+namaBot+", Nama kamu siapa? langsung tulis aja yah gausah pake tanda '"+trigger+"'");
                 await registerSessionHandle.ambilDataTrue(nomor);
             }else{
                 if(lowerIsiPesan == "nama" || lowerIsiPesan == "name" || lowerIsiPesan == "jeneng" || lowerIsiPesan == "manusia" || lowerIsiPesan.includes('wong') || lowerIsiPesan.includes("orang") || lowerIsiPesan.includes("kontol") || lowerIsiPesan.includes("memek") || lowerIsiPesan.includes("saya") || lowerIsiPesan.includes("namaku") || lowerIsiPesan.includes("makhluk") || lowerIsiPesan.includes("kenal") || lowerIsiPesan.includes("nama aku") || lowerIsiPesan.includes("register") || lowerIsiPesan.includes("registrasi") || lowerIsiPesan.includes(".") || lowerIsiPesan.includes("beban") || lowerIsiPesan.includes("stres") || lowerIsiPesan.includes("setres")){
