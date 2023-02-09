@@ -20,28 +20,43 @@
         if(dataAvailable == false){
             await registerSessionHandle.addSessionRegister(nomor);
         }
-
         let statusNama = await registerSessionHandle.cekCompleteNama(nomor);
         let statusGender = await registerSessionHandle.cekCompleteGender(nomor);
         let statusUmur = await registerSessionHandle.cekCompleteUmur(nomor);
         let statusHobi = await registerSessionHandle.cekCompleteHobi(nomor);
-        //console.log("status nama : "+statusNama);
-        //console.log("Pesan : "+isiPesan)
-
         if(statusNama == false){
             if(statusAmbilData == false){
                 message.reply("Perkenalkan Saya "+namaBot+", Nama kamu siapa? langsung tulis aja yah gausah pake tanda '"+trigger+"'");
                 await registerSessionHandle.ambilDataTrue(nomor);
             }else{
-                if(lowerIsiPesan == "nama" || lowerIsiPesan == "name" || lowerIsiPesan == "jeneng" || lowerIsiPesan == "manusia" || lowerIsiPesan.includes('wong') || lowerIsiPesan.includes("orang") || lowerIsiPesan.includes("kontol") || lowerIsiPesan.includes("memek") || lowerIsiPesan.includes("saya") || lowerIsiPesan.includes("namaku") || lowerIsiPesan.includes("makhluk") || lowerIsiPesan.includes("kenal") || lowerIsiPesan.includes("nama aku") || lowerIsiPesan.includes("register") || lowerIsiPesan.includes("registrasi") || lowerIsiPesan.includes(".") || lowerIsiPesan.includes("beban") || lowerIsiPesan.includes("stres") || lowerIsiPesan.includes("setres")){
-                    if(statusJawabSalah == false){
-                        message.reply("Ihhhhh isinya jangan ngawur kayak gitu dong, namamu siapa?");
-                        await registerSessionHandle.wrongAnswerTrue(nomor);
-                    }else{
-                        const pilihJawab = ["Bodoh kamu, disuruh nulis nama yang bener aja gabisa!😡😡","bukan seperti itu, kamu nulis apaan sih gangerti aku tuh","bodoh, apa ibumu tidak megajarimu menulis nama😡😡😡","Kamu tuh nulisnya salah!"];
-                        const rand = Math.floor(Math.random() * pilihJawab.length);
-                        message.reply(pilihJawab[rand]);
-                    }
+                if(lowerIsiPesan.includes("nama") || lowerIsiPesan.includes("name") || lowerIsiPesan.includes("jeneng")){
+                    message.reply("Hey tulis nama kamu aja jangan malah nulis yang lain");
+                }else if(lowerIsiPesan.includes("manusia") || lowerIsiPesan == "wong" || lowerIsiPesan.includes("orang")){
+                    message.reply("Iya tau kamu emang "+isiPesan+" tapi kamu punya nama kan cepet kasi tau!");
+                }else if(lowerIsiPesan.includes("tanya") || lowerIsiPesan.includes("kepo") || lowerIsiPesan.includes("nanya")){
+                    message.reply("Iya lah, cepet kasih tau namamu");
+                }else if(lowerIsiPesan.includes("kontol") || lowerIsiPesan.includes("memek") || lowerIsiPesan.includes("pepek") || lowerIsiPesan.includes("tempek") || lowerIsiPesan.includes("tempik")){
+                    message.reply("yang bener kontol, tinggal jawab nama aja susah");
+                }else if(lowerIsiPesan.includes("bot") || lowerIsiPesan == "ai"){
+                    message.reply("hey anda itu manusia, siapa namamu woi");
+                }else if(lowerIsiPesan.includes("eula ") || lowerIsiPesan == "eula" || lowerIsiPesan.includes("gatau") || lowerIsiPesan.includes("gk tau") || lowerIsiPesan.includes("nggak tau") || lowerIsiPesan.includes("ndak ") || lowerIsiPesan.includes("ndk")){
+                    message.reply("hey anda gatau nama sendiri??, goblok banget jadi orang");
+                }else if(lowerIsiPesan.includes("register") || lowerIsiPesan.includes("registrasi")){
+                    message.reply("Iya tau kamu mau registrasi, kan aku tadi tanya namamu siapa");
+                }else if(lowerIsiPesan.includes("panggilan") || lowerIsiPesan.includes("asli") || lowerIsiPesan.includes("nickname")){
+                    message.reply("Terserah kamu lahh");
+                }else if(lowerIsiPesan.includes("setres") || lowerIsiPesan.includes("stres") || lowerIsiPesan.includes("gila")){
+                    message.reply("Kamu tuh yang stressssss");
+                }else if(lowerIsiPesan.includes("rahasia") || lowerIsiPesan.includes("rahsia") || lowerIsiPesan.includes("tersembunyi")){
+                    message.reply("oke berarti kamu gabisa make botnya!\nkalo udah berubah pikiran bisa register ulang");
+                    chat.sendMessage("Deleting userdata "+nomor);
+                    await registerSessionHandle.deleteSessionRegister(nomor);
+                }else if(lowerIsiPesan.includes("bacot") || lowerIsiPesan.includes("bacod")){
+                    message.reply("Lu yang bacot, aku tanya nama malah balas aneh aneh");
+                }else if(lowerIsiPesan.includes("karep") || lowerIsiPesan.includes("serah") || lowerIsiPesan.includes("suka") || lowerIsiPesan.includes("ngatur")){
+                    message.reply("yaudah aku batalin registrasinya!");
+                    chat.sendMessage("Deleting userdata "+nomor);
+                    await registerSessionHandle.deleteSessionRegister(nomor);
                 }else{
                     if(isiPesan.includes(trigger)){
                         nama = isiPesan.replaceAll(trigger,"")
@@ -119,15 +134,22 @@
                 message.reply("hobimu apa yaa? langsung tulis aja ya!");
                 await registerSessionHandle.ambilDataTrue(nomor);
             }else{
-                if(lowerIsiPesan.includes('kamu') || lowerIsiPesan.includes('eula') || lowerIsiPesan.includes('mencintaimu') || lowerIsiPesan.includes('menyukaimu') || lowerIsiPesan.includes('menyayangimu') || lowerIsiPesan.includes('nanya') || lowerIsiPesan.includes('kepo') || lowerIsiPesan.includes('bacot') || lowerIsiPesan.includes('kamu') || lowerIsiPesan.includes('beban') || lowerIsiPesan.includes('stres') || lowerIsiPesan.includes('setres') || lowerIsiPesan.includes('ngamuk')  || lowerIsiPesan.includes('ngamok')){
-                    if(statusJawabSalah == false){
-                        message.reply("kamuuu, ngisi hobi yang bener dongg!, jangan ngisi kayak gitu aku gasuka");
-                        await registerSessionHandle.wrongAnswerTrue(nomor);
-                    }else{
-                        const salahJawab = ["bodoh,gak gitu caranya nulis hobi","bego, nulisnya jangan ngawur dong","gak usah malu-malu nulis hobi doang kok tapi jangan jawab yang itu aku gamau"];
-                        const rand = Math.floor(Math.random() * salahJawab.length);
-                        message.reply(salahJawab[rand]);
-                    }
+                if(lowerIsiPesan.includes('mencintaimu') || lowerIsiPesan.includes('menyukaimu') || lowerIsiPesan.includes('menyayangimu') || lowerIsiPesan.includes(' kamu')){
+                    message.reply("Lah ngarep ngaca dulu lah minimal, apa hobimu woi");
+                }else if(lowerIsiPesan.includes("nanya") && lowerIsiPesan.includes("banyak") || lowerIsiPesan.includes("tanya") && lowerIsiPesan.includes("banyak")){
+                    message.reply("yaudah kalo gamau ditanyain aku batalin registrasinya!");
+                    chat.sendMessage("Deleting userdata "+nomor);
+                    await registerSessionHandle.deleteSessionRegister(nomor);
+                }else if(lowerIsiPesan.includes("setres") || lowerIsiPesan.includes("stres")){
+                    message.reply("lah lu yang setress, udah tau bot malah dikatain")
+                }else if(lowerIsiPesan.includes("kepo")){
+                    message.reply("iya aku kepo, makanya cepet jawab");
+                }else if(lowerIsiPesan.includes("ngamuk") || lowerIsiPesan.includes("ngamok")){
+                    message.reply("ini mau register apa nggak, ditanyain hobi aja susah");
+                }else if(lowerIsiPesan.includes("cok ") || lowerIsiPesan.includes(" cok") || lowerIsiPesan.includes("kontol") || lowerIsiPesan.includes("bangsat") || lowerIsiPesan.includes("tempek") || lowerIsiPesan.includes("anjing")){
+                    message.reply("Gausah Ngegas Cok, aku tanya hobi loh!");
+                }else if(lowerIsiPesan.includes("hobi")){
+                    message.reply("Iya langsung tulis aja h!");
                 }else{
                     message.reply("Jadi hobimu "+isiPesan);
                     await registerSessionHandle.completingHobi(nomor, isiPesan);

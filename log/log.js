@@ -28,8 +28,8 @@ const logfitur = async(nomor, nama, fitur, grup, link) => {
 
 const logchat = async(eula, nomor, nama, grup, chat) =>{
     if(grup == false){grup = "private chat"}
-    eula.sendMessage("62895395391278@c.us",nomor+" dengan nama "+nama+" di grup "+grup+" mengirim pesan : \n\n"+chat);
-    eula.sendMessage("6289514651477@c.us",nomor+" dengan nama "+nama+" di grup "+grup+" mengirim pesan : \n\n"+chat);
+    //eula.sendMessage("62895395391278@c.us",nomor+" dengan nama "+nama+" di grup "+grup+" mengirim pesan : \n\n"+chat);
+    //eula.sendMessage("6289514651477@c.us",nomor+" dengan nama "+nama+" di grup "+grup+" mengirim pesan : \n\n"+chat);
 }
 
 const messageMain = async(eula, message) => {
