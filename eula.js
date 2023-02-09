@@ -1,6 +1,6 @@
-const fs = require("fs");
-const { Client, LocalAuth, MessageMedia, ChatTypes, Buttons } = require('whatsapp-web.js');
-const axios = require("axios");
+    const fs = require("fs");
+    const { Client, LocalAuth, MessageMedia, ChatTypes, Buttons } = require('whatsapp-web.js');
+    const axios = require("axios");
 const { userInfo } = require("os");
 const { apakahMenu } = require("./lib/randomtext");
 const random = require("./lib/randomtext");
@@ -1282,8 +1282,48 @@ const eulaLawrence = async(eula,message) => {
             await logfitur(nomor, namaPengirim, "My User", groupname, false);
             chat.sendMessage(datae);
         break;
-        case trigger+"user":
-            
+        case trigger+"ganti":
+            if(eulawangi != ""){
+                const mgsplit = eulawangi.split(" ");
+                const cmdd = mgsplit.slice(0,1).toString();
+                const gantine = mgsplit.slice(1).toString().replaceAll(","," ");
+                switch(cmdd){
+                    case "nama":
+                        if(gantine != ""){
+                            res = await userHandle.gantiNama(nomor, gantine);
+                            if(res == true){chat.sendMessage("*"+namaBot+"*\n\nNama berhasil diganti menjadi "+gantine)}else{message.reply("*"+namaBot+"*\n\nGagal Mengganti Nama")}
+                        }else{
+                            message.reply("*"+namaBot+"*\n\nFormat Pesan Salah, "+trigger+"ganti nama <nama baru>");
+                        }
+                    break;
+                    case "umur":
+                        if(gantine != ""){
+                            if(gantine.includes(0) || gantine.includes(1) || gantine.includes(2) || gantine.includes(3) || gantine.includes(4) || gantine.includes(5) || gantine.includes(6) || gantine.includes(7) || gantine.includes(8) || gantine.includes(9)){
+                                if(parseInt(gantine) > 7 && parseInt(gantine) < 60){
+                                    res = await userHandle.gantiUmur(nomor, gantine);
+                                    if(res == true){chat.sendMessage("*"+namaBot+"*\n\nUmur berhasil diganti menjadi "+gantine)}else{message.reply("*"+namaBot+"*\n\nGagal Mengganti Nama")};
+                                }else{
+                                    message.reply("*"+namaBot+"*\n\nPenggantian gagal karena umur tidak valid, "+trigger+"ganti umur <umur baru>")
+                                }
+                            }else{
+                                message.reply("*"+namaBot+"*\n\nPenggantian gagal karena umur tidak valid, "+trigger+"ganti umur <umur baru>")
+                            }
+                        }else{
+                            message.reply("*"+namaBot+"*\n\nFormat Pesan Salah, "+trigger+"ganti umur <umur baru>");
+                        }
+                    break;
+                    case "hobi":
+                        if(gantine != ""){
+
+                        }else{
+                            message.reply("*"+namaBot+"*\n\nFormat Pesan Salah, "+trigger+"ganti hobi <hobi baru>");
+                        }
+                    break;
+                    default:
+                }
+            }else{
+                message.reply("*"+namaBot+"*\n\nFormat Pesan Salah, "+trigger+"user (nama|umur|hobi) <update>")
+            }
         break;
         case trigger+"broadcast":
             res = await eula.getChats();
