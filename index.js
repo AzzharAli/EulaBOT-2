@@ -18,7 +18,7 @@ const eula = new Client({
         //headless:false
         
     },
-    authStrategy: new LocalAuth({ clientId: "EULAWANGI",dataPath:"./.EULAWANGI" }),
+    authStrategy: new LocalAuth({ clientId: "EulaBOT",dataPath:"./.EULAWANGI" }),
     ffmpegPath: 'C:/ffmpeg/bin/ffmpeg.exe'
     
 });
