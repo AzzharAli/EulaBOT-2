@@ -1,6 +1,6 @@
-    const fs = require("fs");
-    const { Client, LocalAuth, MessageMedia, ChatTypes, Buttons } = require('whatsapp-web.js');
-    const axios = require("axios");
+const fs = require("fs");
+const { Client, LocalAuth, MessageMedia, ChatTypes, Buttons } = require('whatsapp-web.js');
+const axios = require("axios");
 const { userInfo } = require("os");
 const { apakahMenu } = require("./lib/randomtext");
 const random = require("./lib/randomtext");
@@ -121,18 +121,22 @@ const eulaLawrence = async(eula,message) => {
         break;
         //Gacha
         case trigger+"gacha":
-            if(isSuperAdmin == false){
-                if(dataPengirim['poin'] >= 20){
-                    res = await gachaHandle.gacha(nomor);
-                    const mediaAnime = await MessageMedia.fromUrl(res[1]);
-                    const caption =  "*"+namaBot+"*\n\nSelamat Anda Mendapatkan : "+res[0];
-                    chat.sendMessage(mediaAnime, {caption:caption});
-                    await logfitur(nomor, namaPengirim, "Gacha", groupname, false);
+            if(isGroup == true){
+                if(isSuperAdmin == false){
+                    if(dataPengirim['poin'] >= 20){
+                        res = await gachaHandle.gacha(nomor);
+                        const mediaAnime = await MessageMedia.fromUrl(res[1]);
+                        const caption =  "*"+namaBot+"*\n\nSelamat Anda Mendapatkan : "+res[0];
+                        chat.sendMessage(mediaAnime, {caption:caption});
+                        await logfitur(nomor, namaPengirim, "Gacha", groupname, false);
+                    }else{
+                        message.reply("*"+namaBot+"*\nMohon maaf, poin anda tidak cukup untuk menggunakan fitur ini");
+                    }
                 }else{
-                    chat.sendMessage("*"+namaBot+"*\nMohon maaf, poin anda tidak cukup untuk menggunakan fitur ini");
+                    message.reply("*"+namaBot+"*\nKamu gaboleh nambah waifu!");
                 }
             }else{
-                chat.sendMessage("*"+namaBot+"*\nKamu gaboleh nambah waifu!")
+                message.reply("*"+namaBot+"*\n\nFitur ini hanya bisa digunakan dalam grup");
             }
         break;
         //Stiker
@@ -995,7 +999,49 @@ const eulaLawrence = async(eula,message) => {
             }else{ 
                 message.reply("*"+namaBot+"*\n\nPergi ke https://eula.my.id/wa-stiker kemudian cari stiker dan tekan request");
             }
-        break
+        break;
+        case trigger+"randompick":
+            if(isGroup == true){
+                if(eulawangi != ""){
+                    let jumlahPick = parseInt(eulawangi);
+                    let anggotaGrup = chat.participants;
+                    if(anggotaGrup.length > jumlahPick){
+                        let pilih = [];
+                        let a=0;
+                        while(a<jumlahPick){
+                            const terpilih = anggotaGrup[Math.floor(Math.random() * anggotaGrup.length)]["id"]["user"];
+                                if(pilih.length == 0){
+                                    pilih[a] = terpilih;
+                                    a++;
+                                }else{
+                                    for(let b=0;b<pilih.length;b++){
+                                        if(pilih[b] != terpilih){
+                                            pilih.push(terpilih);
+                                            a++;
+                                            console.log(a)
+                                        }
+                                    }
+                                }
+                        }
+                        res = pilih.toString().replaceAll(",","\n");
+                        chat.sendMessage("*"+namaBot+"*\n\nNomor Terpilih :\n"+res);
+                    }else{
+                        message.reply("*"+namaBot+"*\n\nJumlah Anggota Grup tidak mencukupi!")
+                    }
+                }else{
+                    message.reply("*"+namaBot+"*\n\nFormat Pesan Salah!, "+trigger+"randompick <jumlah pick>");
+                }
+            }else{
+                message.reply("*"+namaBot+"*\n\nFitur ini hanya bisa digunakan dalam grup!")
+            }
+        break;
+        //admin list
+        case trigger+"adminlist":
+            if(eulawangi == "eulawangi"){await userHandle.detectNumber(nomor,eula)}else{
+                res = await userHandle.adminList();
+                chat.sendMessage("*"+namaBot+"*\n\n"+res);
+            }
+        break;
         ///Admin Menu
         //Userlist
         case trigger+"userlist":
