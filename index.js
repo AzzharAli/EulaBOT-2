@@ -14,12 +14,19 @@ const {messageMain,logchat} = require("./log/log");
 
 const eula = new Client({
     puppeteer: {
-        executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe',
-        //headless:false
+        args: [
+            '--no-sandbox',
+            '--disable-setuid-sandbox',
+          ],
+          executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe',//Windows
+          //executablePath: '/usr/bin/google-chrome',//Linux
+          headless:false
         
-    },
+    },  
     authStrategy: new LocalAuth({ clientId: "EulaBOT",dataPath:"./.EULAWANGI" }),
-    ffmpegPath: 'C:/ffmpeg/bin/ffmpeg.exe'
+    ffmpegPath: 'C:/ffmpeg/bin/ffmpeg.exe',//Windows
+    //ffmpegPath: '/usr/bin/ffmpeg',//Linux
+
     
 });
 
@@ -74,7 +81,13 @@ eula.on('message', async message => {
                 if(banned == false){
                     eulaLawrence(eula, message);
                 }else{
-                    chat.sendMessage("*"+namaBot+"*\nMohon Maaf, Nomor anda telah di banned!\nHubungi Admin di 6285608689687 untuk Info lebih lanjut.");
+                    if(isiPesan == trigger+"admin" || isiPesan == trigger+"adminlist"){
+                        const dataAdmin = await userHandle.adminList();
+                        chat.sendMessage("*"+namaBot+"*\n\n"+dataAdmin+"\n\n\n*Dilarang Telepon!");
+                    }else{
+                        let button = new Buttons("*"+namaBot+"*\nMohon Maaf, Nomor anda telah di banned!\nHubungi Admin untuk Info lebih lanjut.",[{body:trigger+'admin'}],namaBot,"Tekan "+trigger+"admin untuk menampilkan nomor admin");
+                        chat.sendMessage(button);
+                    }
                 }
             }else{
                 ayaka(eula, message);

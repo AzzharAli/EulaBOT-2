@@ -1,0 +1,1 @@
+update bug 11 feb 2023 = whatsapp-web.js/src/util/injected.js in line 80 -> window.Store.QueryExist = window.mR.findModule('queryExists')[0]?.queryExists;

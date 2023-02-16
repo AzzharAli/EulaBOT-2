@@ -239,9 +239,61 @@ const animatedNsfwMenu = async()=>{
 
 }
 
-const animeHusbu = async() => {
+const waifupictsfw = async(kategori)=> {
+    if(kategori){
+        try {
+            let res = await axios.get('https://api.waifu.pics/sfw/'+kategori,
+            {
+                headers: {
+                    'Accept-Encoding': 'application/json',
+                }
+            });
+            if(res.status == 200){
+                return(res.data.url)
+            }else{
+                return(false)
+            }
+        } catch (err) {
+            if (err.response) {
+                return(false);
+            } else if (err.request) {
+                return(false);
+            } else {
+                return(false);
+            }
+        }
+    }else{
+        return(false);
+    }
+}
 
+const waifupictnsfw = async(kategori)=> {
+    if(kategori){
+        try {
+            let res = await axios.get('https://api.waifu.pics/sfw/'+kategori,
+            {
+                headers: {
+                    'Accept-Encoding': 'application/json',
+                }
+            });
+            if(res.status == 200){
+                return(res.data.url)
+            }else{
+                return(false)
+            }
+        } catch (err) {
+            if (err.response) {
+                return(false);
+            } else if (err.request) {
+                return(false);
+            } else {
+                return(false);
+            }
+        }
+    }else{
+        return(false);
+    }
 }
 
 
-module.exports = {danbooru, danbooruG, danbooruS, danbooruQ, danbooruE, animeNeko, animeWaifu, animeHusbu, genshinNsfwComicMenu, animatedNsfwMenu}
+module.exports = {danbooru, danbooruG, danbooruS, danbooruQ, danbooruE, animeNeko, animeWaifu, genshinNsfwComicMenu, animatedNsfwMenu, waifupictsfw, waifupictnsfw}

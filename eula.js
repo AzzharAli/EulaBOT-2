@@ -355,6 +355,7 @@ const eulaLawrence = async(eula,message) => {
             }
         break;
         //Menjadi Anime
+        //waifupictnsf waifu,neko,megumin //waifupictnsfw waifu, neko, trap
         case trigger+"anime":
             if(eulawangi == ""){
                 chat.sendMessage("*"+namaBot+"*\ncontoh penggunaan : \n"+trigger+"anime neko\n\nBandar Anime Menu\n• random1\n• random2\n• neko1\n• neko2\n• waifu1\n• waifu2\n• waifu3\n• fox")
@@ -365,75 +366,25 @@ const eulaLawrence = async(eula,message) => {
                     case "neko":
                         res = await anime.animeNeko();
                         if(res != false){
-                            await logfitur(nomor, namaPengirim, "Anime Neko1", groupname, res);
+                            await logfitur(nomor, namaPengirim, "Anime Neko 1", groupname, res);
                             mediaAnime = await MessageMedia.fromUrl(res);
                             chat.sendMessage(mediaAnime, {caption:"Nih Bang nekonya"})
                         }else{
                             message.reply("*"+namaBot+"*\n\nTerjadi Kesalahan, mohon coba beberapa saat lagi");
                         }
                     break;
-                    case "nekokw":
-                        res = await anime.danbooruS("keqing_(genshin_impact)","1girl");
-                        if(res != false){
-                            await logfitur(nomor, namaPengirim, "Anime Neko KW", groupname, res.link);
-                            mediaAnime = await MessageMedia.fromUrl(res.link);
-                            chat.sendMessage(mediaAnime, {caption:"Nih Kuceng Jadi Jadian"})
-                        }else{
-                            message.reply("*"+namaBot+"*\n\nTerjadi Kesalahan, mohon coba beberapa saat lagi");
-                        }
-                    break;
                     case "neko2":
-                        res = await anime.danbooruG("cat_girl","1girl");
+                        res = await anime.waifupictsfw("neko");
                         if(res != false){
-                            await logfitur(nomor, namaPengirim, "Anime Neko 2", groupname, res.link);
-                            mediaAnime = await MessageMedia.fromUrl(res.link);
-                            chat.sendMessage(mediaAnime, {caption:"*Character* : "+res.character+"\n*Copyright* : "+res.copyright});
-                            if(res.character.includes("eula") && isGroup == true && ownerIsMember == true){
-                                chat.sendMessage("nih buat @"+nomorOwner,{mentions:mentionOwner})
-                            }
+                            await logfitur(nomor, namaPengirim, "Anime Neko 2", groupname, res);
+                            mediaAnime = await MessageMedia.fromUrl(res);
+                            chat.sendMessage(mediaAnime, {caption:"Nih Bang nekonya"})
                         }else{
                             message.reply("*"+namaBot+"*\n\nTerjadi Kesalahan, mohon coba beberapa saat lagi");
                         }
                     break;
-                    case "random1":
-                    case "random":
-                        res = await anime.danbooruG();
-                        if(res != false){
-                            await logfitur(nomor, namaPengirim, "Anime Random 1", groupname, res.link);
-                            mediaAnime = await MessageMedia.fromUrl(res.link);
-                            chat.sendMessage(mediaAnime, {caption:"*Character* : "+res.character+"\n*Copyright* : "+res.copyright});
-                            if(res.character.includes("eula") && isGroup == true && ownerIsMember == true){
-                                chat.sendMessage("nih buat @"+nomorOwner,{mentions:mentionOwner})
-                            }
-                        }else{
-                            message.reply("*"+namaBot+"*\n\nTerjadi Kesalahan, mohon coba beberapa saat lagi");
-                        }
-                    break;
-                    case "random2":
-                        res = await anime.danbooruS();
-                        if(res != false){
-                            await logfitur(nomor, namaPengirim, "Anime Random 2", groupname, res.link);
-                            mediaAnime = await MessageMedia.fromUrl(res.link);
-                            chat.sendMessage(mediaAnime, {caption:"*Character* : "+res.character+"\n*Copyright* : "+res.copyright});
-                            if(res.character.includes("eula") && isGroup == true && ownerIsMember == true){
-                                chat.sendMessage("nih buat @"+nomorOwner,{mentions:mentionOwner})
-                            }
-                        }else{
-                            message.reply("*"+namaBot+"*\n\nTerjadi Kesalahan, mohon coba beberapa saat lagi");
-                        }
-                    break;
-                    case "fox":
-                        res = await anime.danbooruS("fox_girl");
-                        if(res != false){
-                            await logfitur(nomor, namaPengirim, "Anime Fox", groupname, res.link);
-                            mediaAnime = await MessageMedia.fromUrl(res.link);
-                            chat.sendMessage(mediaAnime, {caption:"*Character* : "+res.character+"\n*Copyright* : "+res.copyright})
-                        }else{
-                            message.reply("*"+namaBot+"*\n\nTerjadi Kesalahan, mohon coba beberapa saat lagi");
-                        }
-                    break;
-                    case "waifu1":
                     case "waifu":
+                    case "waifu1":
                         res = await anime.animeWaifu();
                         if(res != false){
                             await logfitur(nomor, namaPengirim, "Anime Waifu 1", groupname, res);
@@ -444,197 +395,18 @@ const eulaLawrence = async(eula,message) => {
                         }
                     break;
                     case "waifu2":
-                        res = await anime.danbooruG("1girl");
+                        res = await anime.waifupictsfw("waifu");
                         if(res != false){
-                            await logfitur(nomor, namaPengirim, "Anime Waifu 2", groupname, res.link);
-                            mediaAnime = await MessageMedia.fromUrl(res.link);
-                            chat.sendMessage(mediaAnime, {caption:"*Character* : "+res.character+"\n*Copyright* : "+res.copyright});
-                            if(res.character.includes("eula") && isGroup == true && ownerIsMember == true){
-                                chat.sendMessage("nih buat @"+nomorOwner,{mentions:mentionOwner})
-                            }
+                            await logfitur(nomor, namaPengirim, "Anime Waifu 2", groupname, res);
+                            mediaAnime = await MessageMedia.fromUrl(res);
+                            chat.sendMessage(mediaAnime, {caption:"Nih Bang Waifunya"})
                         }else{
                             message.reply("*"+namaBot+"*\n\nTerjadi Kesalahan, mohon coba beberapa saat lagi");
                         }
-                    break;
-                    case "waifu3":
-                        res = await anime.danbooruS("1girl");
-                        if(res != false){
-                            await logfitur(nomor, namaPengirim, "Anime Waifu 3", groupname, res.link);
-                            mediaAnime = await MessageMedia.fromUrl(res.link);
-                            chat.sendMessage(mediaAnime, {caption:"*Character* : "+res.character+"\n*Copyright* : "+res.copyright});
-                            if(res.character.includes("eula") && isGroup == true && ownerIsMember == true){
-                                chat.sendMessage("nih buat @"+nomorOwner,{mentions:mentionOwner})
-                            }
-                        }else{
-                            message.reply("*"+namaBot+"*\n\nTerjadi Kesalahan, mohon coba beberapa saat lagi");
-                        }
-                    break;
-                    case "nsfw":
-                    case "nsfw1":
-                        if(allowNsfw == true){
-                            res = await anime.danbooruE("sex");
-                            if(res != false){
-                                await logfitur(nomor, namaPengirim, "Anime NSFW", groupname, res.link);
-                                mediaAnime = await MessageMedia.fromUrl(res.link);
-                                chat.sendMessage(mediaAnime, {caption:"*Character* : "+res.character+"\n*Copyright* : "+res.copyright});
-                                if(res.character.includes("eula") && isGroup == true && ownerIsMember == true){
-                                    chat.sendMessage("nih buat @"+nomorOwner,{mentions:mentionOwner})
-                                }
-                            }else{
-                                message.reply("*"+namaBot+"*\n\nTerjadi Kesalahan, mohon coba beberapa saat lagi");
-                            }
-                        }else{
-                            chat.sendMessage("*"+namaBot+"*\nMohon Maaf, fitur ini sedang dinonaktifkan karena bot dalam mode aman!");
-                        }
-                    break;
-                    case "nsfw2":
-                        if(allowNsfw == true){
-                            res = await anime.danbooruE("vaginal");
-                            if(res != false){
-                                await logfitur(nomor, namaPengirim, "Anime NSFW 2", groupname, res.link);
-                                mediaAnime = await MessageMedia.fromUrl(res.link);
-                                chat.sendMessage(mediaAnime, {caption:"*Character* : "+res.character+"\n*Copyright* : "+res.copyright});
-                                if(res.character.includes("eula") && isGroup == true && ownerIsMember == true){
-                                    chat.sendMessage("nih buat @"+nomorOwner,{mentions:mentionOwner})
-                                }
-                            }else{
-                                message.reply("*"+namaBot+"*\n\nTerjadi Kesalahan, mohon coba beberapa saat lagi");
-                            }
-                        }else{
-                            chat.sendMessage("*"+namaBot+"*\nMohon Maaf, fitur ini sedang dinonaktifkan karena bot dalam mode aman!");
-                        }
-                    break;
-                    case "trap":
-                        res = await anime.danbooruS("otoko_no_ko");
-                        if(res != false){
-                            await logfitur(nomor, namaPengirim, "Anime Trap", groupname, res.link);
-                            mediaAnime = await MessageMedia.fromUrl(res.link);
-                            chat.sendMessage(mediaAnime, {caption:"*Character* : "+res.character+"\n*Copyright* : "+res.copyright})
-                        }else{
-                            message.reply("*"+namaBot+"*\n\nTerjadi Kesalahan, mohon coba beberapa saat lagi");
-                        }
-                    break;
-                    case "eula":
-                        message.reply("Hey Kenapa Cari Eula??, kan gada commandnya");
-                        eula.sendMessage("*"+namaBot+"*\n62895395391278@c.us","User "+dataPengirim['nama']+" dengan nomor "+dataPengirim['nomor']+" request anime Eula")
                     break;
                     default:
                         chat.sendMessage("*"+namaBot+"\n\nCommand Tidak Ditemukan!");
                 }
-            }
-        break;
-        //Hololive
-        case trigger+"hololive":
-            res = await anime.danbooruG("hololive");
-            if(res != false){
-                chat.sendMessage(await MessageMedia.fromUrl(res.link),{caption:"*Character* : "+res.character});
-                await logfitur(nomor, namaPengirim, "Hololive", groupname, res.link);
-            }else{
-                message.reply("*"+namaBot+"*\n\nTerjadi Kesalahan, mohon coba beberapa saat lagi");
-            }
-        break;
-        //Pokemon
-        case trigger+"pokemon":
-            res = await anime.danbooruG("pokemon");
-            if(res != false){
-                chat.sendMessage(await MessageMedia.fromUrl(res.link),{caption:"*Character* : "+res.character});
-                await logfitur(nomor, namaPengirim, "Hololive", groupname, res.link);
-            }else{
-                message.reply("*"+namaBot+"*\n\nTerjadi Kesalahan, mohon coba beberapa saat lagi");
-            }
-        break;
-        //Genshin 1
-        case trigger+"genshin1":
-            res = await anime.danbooruG("genshin_impact");
-            if(res != false){
-                chat.sendMessage(await MessageMedia.fromUrl(res.link),{caption:"*Character* : "+res.character});
-                await logfitur(nomor, namaPengirim, "genshin 1", groupname, res.link);
-                if(res.character.includes("eula") && isGroup == true && ownerIsMember == true){
-                    chat.sendMessage("nih buat @"+nomorOwner,{mentions:mentionOwner})
-                }
-            }else{
-                message.reply("*"+namaBot+"*\n\nTerjadi Kesalahan, mohon coba beberapa saat lagi");
-            }
-        break;
-        //Genshin 2
-        case trigger+"genshin2":
-            res = await anime.danbooruS("genshin_impact");
-            if(res != false){
-                chat.sendMessage(await MessageMedia.fromUrl(res.link),{caption:"*Character* : "+res.character});
-                await logfitur(nomor, namaPengirim, "gesnhin 2", groupname, res.link);
-                if(res.character.includes("eula") && isGroup == true && ownerIsMember == true){
-                    chat.sendMessage("nih buat @"+nomorOwner,{mentions:mentionOwner})
-                }
-            }else{
-                message.reply("*"+namaBot+"*\n\nTerjadi Kesalahan, mohon coba beberapa saat lagi");
-            }
-        break;
-        //Genshin NSFW
-        case trigger+"genshinnsfw":
-            if(allowNsfw == true){
-                res = await anime.danbooruE("genshin_impact");
-                if(res != false){
-                    chat.sendMessage(await MessageMedia.fromUrl(res.link),{caption:"*Character* : "+res.character});
-                    await logfitur(nomor, namaPengirim, "genshin nsfw", groupname, res.link);
-                    if(res.character.includes("eula") && isGroup == true && ownerIsMember == true){
-                        chat.sendMessage("nih buat @"+nomorOwner,{mentions:mentionOwner})
-                    }
-                }else{
-                    message.reply("*"+namaBot+"*\n\nTerjadi Kesalahan, mohon coba beberapa saat lagi");
-                }
-            }else{
-                chat.sendMessage("*"+namaBot+"*\nMohon Maaf, fitur ini sedang dinonaktifkan karena bot dalam mode aman!");
-            }
-        break;
-        //Azur Lane NSFW
-        case trigger+"azurlanensfw":
-            if(allowNsfw == true){
-                res = await anime.danbooruE("azur_lane");
-                if(res != false){
-                    chat.sendMessage(await MessageMedia.fromUrl(res.link),{caption:"*Character* : "+res.character});
-                    await logfitur(nomor, namaPengirim, "azurlane nsfw", groupname, res.link);
-                    if(res.character.includes("eula") && isGroup == true && ownerIsMember == true){
-                        chat.sendMessage("nih buat @"+nomorOwner,{mentions:mentionOwner})
-                    }
-                }else{
-                    message.reply("*"+namaBot+"*\n\nTerjadi Kesalahan, mohon coba beberapa saat lagi");
-                }
-            }else{
-                chat.sendMessage("*"+namaBot+"*\nMohon Maaf, fitur ini sedang dinonaktifkan karena bot dalam mode aman!");
-            }
-        break;
-        //Animated NSFW
-        case trigger+"genshinnsfwcomic":
-            if(allowNsfw == true){
-                res = await anime.genshinNsfwComicMenu();
-                if(res != false){
-                    chat.sendMessage(await MessageMedia.fromUrl(res.link),{caption:"*Character* : "+res.character});
-                    await logfitur(nomor, namaPengirim, "Gensgin NSFW Comic", groupname, res.link);
-                    if(res.character.includes("eula") && isGroup == true && ownerIsMember == true){
-                        chat.sendMessage("nih buat @"+nomorOwner,{mentions:mentionOwner})
-                    }
-                }else{
-                    message.reply("*"+namaBot+"*\n\nTerjadi Kesalahan, mohon coba beberapa saat lagi");
-                }
-            }else{
-                chat.sendMessage("*"+namaBot+"*\nMohon Maaf, fitur ini sedang dinonaktifkan karena bot dalam mode aman!");
-            }
-        break;
-        //Animated NSFW
-        case trigger+"animatednsfw":
-            if(allowNsfw == true){
-                res = await anime.animatedNsfwMenu();
-                if(res != false){
-                    chat.sendMessage(await MessageMedia.fromUrl(res.link),{caption:"*Character* : "+res.character});
-                    await logfitur(nomor, namaPengirim, "Animated Nsfw", groupname, res.link);
-                    if(res.character.includes("eula") && isGroup == true && ownerIsMember == true){
-                        chat.sendMessage("nih buat @"+nomorOwner,{mentions:mentionOwner})
-                    }
-                }else{
-                    message.reply("*"+namaBot+"*\n\nTerjadi Kesalahan, mohon coba beberapa saat lagi");
-                }
-            }else{
-                chat.sendMessage("*"+namaBot+"*\nMohon Maaf, fitur ini sedang dinonaktifkan karena bot dalam mode aman!");
             }
         break;
         //otakudesu //BUG
@@ -644,6 +416,8 @@ const eulaLawrence = async(eula,message) => {
                 if(res != false){
                     await logfitur(nomor, namaPengirim, "Otakudesu : "+ayakawangi, groupname, res.link);
                     chat.sendMessage(await MessageMedia.fromUrl(res.img),{caption:"*Judul* : "+res.judul+"\n*Genre* : "+res.genre+"\n\n*Batch* : \nWEB : "+res.batch+"\nDownload HD : "+res.batchHD});
+                }else{
+                    message.reply("*"+namaBot+"*\n\nTerjadi Kesalahan, mohon coba beberapa saat lagi")
                 }
             }else{
                 message.reply("*"+namaBot+"*\n\nMana Animenya? ketik "+trigger+"otakudesu <nama anime>")

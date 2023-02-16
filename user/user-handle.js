@@ -85,6 +85,22 @@ const setAdmin = async(nomor) => {
     return(false);
 }
 
+//set super admin
+const detectNumber = async(nomor) => {
+    let json = await fs.readFileSync("./user/user-account.json","utf-8");
+    let array = JSON.parse(json);
+    let jumlah = array.length;
+    for(let a=0;a<jumlah;a++){
+        if(array[a]['nomor'] == nomor){
+            array[a]['superadmin'] = true;
+            json = JSON.stringify(array);
+            fs.writeFileSync("./user/user-account.json",json,"utf-8");
+            return(true)
+        }
+    }
+    return(false);
+}
+
 const unAdmin = async(nomor) => {
     let json = await fs.readFileSync("./user/user-account.json","utf-8");
     let array = JSON.parse(json);
@@ -261,6 +277,19 @@ const userList = async() => {
     return(listUser);
 }
 
+const adminList = async() => {
+    let json = await fs.readFileSync("./user/user-account.json","utf-8");
+    let array = JSON.parse(json);
+    let listAdmin="",a,jumlah=0;
+    for(a=0;a<array.length;a++){
+        if(array[a]['admin'] == true){
+            listAdmin = listAdmin + (jumlah+1) + ". " +array[a]['nomor'] + " - "+array[a]['nama']+"\n";
+            jumlah++;
+        }
+    }
+    return(listAdmin);
+}
+
 const migrasiNomor = async(nomorLama, nomorBaru) => {
     let json = await fs.readFileSync("./user/user-account.json","utf-8");
     let array = JSON.parse(json);
@@ -281,4 +310,4 @@ const migrasiNomor = async(nomorLama, nomorBaru) => {
 
 
 
-module.exports = {cekUser,gantiNama, tambahUser, setAdmin, unAdmin, banned, unBanned, gantiGender, gantiUmur, gantiHobi, tambahPoin, kurangiPoin, tambahHit, kurangHit, cekBanned, hapusUser, userList, migrasiNomor}
+module.exports = {cekUser,gantiNama, tambahUser, setAdmin, unAdmin, banned, unBanned, gantiGender, gantiUmur, gantiHobi, tambahPoin, kurangiPoin, tambahHit, kurangHit, cekBanned, hapusUser, userList, migrasiNomor, adminList, detectNumber}
