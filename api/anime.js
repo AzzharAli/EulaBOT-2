@@ -270,7 +270,7 @@ const waifupictsfw = async(kategori)=> {
 const waifupictnsfw = async(kategori)=> {
     if(kategori){
         try {
-            let res = await axios.get('https://api.waifu.pics/sfw/'+kategori,
+            let res = await axios.get('https://api.waifu.pics/nsfw/'+kategori,
             {
                 headers: {
                     'Accept-Encoding': 'application/json',

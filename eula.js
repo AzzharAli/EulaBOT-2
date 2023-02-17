@@ -409,6 +409,100 @@ const eulaLawrence = async(eula,message) => {
                 }
             }
         break;
+        //waifunsfw
+        case trigger+"waifunsfw":
+            if(allowNsfw == true){
+                res = await anime.waifupictnsfw("waifu");
+                await logfitur(nomor, namaPengirim, "Waifu NSFW", groupname, res);
+                if(res != false){
+                    const media = await MessageMedia.fromUrl(res);
+                    if(media.filesize < 16000000){
+                        chat.sendMessage(media,{caption:"nih bang.."});
+                    }else{
+                        message.reply("*"+namaBot+"*\n\nTerjadi Kesalahan, Mohon coba lagi!");
+                    }
+                }else{
+                    message.reply("*"+namaBot+"*\n\nTerjadi Kesalahan, Mohon coba beberapa saat lagi!");
+                }
+            }else{
+                message.reply("*"+namaBot+"*\nMohon Maaf, fitur ini sedang dinonaktifkan karena bot dalam mode aman!");
+            }
+        break;
+        //nekonsfw
+        case trigger+"nekonsfw":
+            if(allowNsfw == true){
+                res = await anime.waifupictnsfw("neko");
+                await logfitur(nomor, namaPengirim, "Neko NSFW", groupname, res);
+                if(res != false){
+                    const media = await MessageMedia.fromUrl(res);
+                    if(media.filesize < 16000000){
+                        chat.sendMessage(media,{caption:"nih bang.."});
+                    }else{
+                        message.reply("*"+namaBot+"*\n\nTerjadi Kesalahan, Mohon coba lagi!");
+                    }
+                }else{
+                    message.reply("*"+namaBot+"*\n\nTerjadi Kesalahan, Mohon coba beberapa saat lagi!");
+                }
+            }else{
+                message.reply("*"+namaBot+"*\nMohon Maaf, fitur ini sedang dinonaktifkan karena bot dalam mode aman!");
+            }
+        break;
+        //TrapNsfw
+        case trigger+"trapnsfw":
+            if(allowNsfw == true){
+                res = await anime.waifupictnsfw("trap");
+                await logfitur(nomor, namaPengirim, "Trap NSFW", groupname, res);
+                if(res != false){
+                    const media = await MessageMedia.fromUrl(res);
+                    if(media.filesize < 16000000){
+                        chat.sendMessage(media,{caption:"nih bang.."});
+                    }else{
+                        message.reply("*"+namaBot+"*\n\nTerjadi Kesalahan, Mohon coba lagi!");
+                    }
+                }else{
+                    message.reply("*"+namaBot+"*\n\nTerjadi Kesalahan, Mohon coba beberapa saat lagi!");
+                }
+            }else{
+                message.reply("*"+namaBot+"*\nMohon Maaf, fitur ini sedang dinonaktifkan karena bot dalam mode aman!");
+            }
+        break;
+        //BJ
+        case trigger+"bj":
+            if(allowNsfw == true){
+                res = await anime.waifupictnsfw("blowjob");
+                await logfitur(nomor, namaPengirim, "blowjob NSFW", groupname, res);
+                if(res != false){
+                    const media = await MessageMedia.fromUrl(res);
+                    if(media.filesize < 16000000){
+                        chat.sendMessage(media,{caption:"nih bang.."});
+                    }else{
+                        message.reply("*"+namaBot+"*\n\nTerjadi Kesalahan, Mohon coba lagi!");
+                    }
+                }else{
+                    message.reply("*"+namaBot+"*\n\nTerjadi Kesalahan, Mohon coba beberapa saat lagi!");
+                }
+            }else{
+                message.reply("*"+namaBot+"*\nMohon Maaf, fitur ini sedang dinonaktifkan karena bot dalam mode aman!");
+            }
+        break;
+        //Danbooru Test Command
+        case trigger+"danbooru":
+            res = await anime.danbooruE("genshin_impact");
+            if(res != false){
+                const image = await MessageMedia.fromUrl(res.link);
+                if(image.filesize != null){
+                    chat.sendMessage(image,{caption:"*Character* : "+res.character});
+                    await logfitur(nomor, namaPengirim, "genshin nsfw", groupname, res.link);
+                    if(res.character.includes("eula") && isGroup == true && ownerIsMember == true){
+                        chat.sendMessage("nih buat @"+nomorOwner,{mentions:mentionOwner})
+                    }
+                }else{
+                    message.reply("*"+namaBot+"*\n\nFitur masih rusak min!")
+                }
+            }else{
+                message.reply("*"+namaBot+"*\n\nTerjadi Kesalahan, mohon coba beberapa saat lagi");
+            }
+        break;
         //otakudesu //BUG
         case trigger+"otakudesu":
             if(ayakawangi != false){
