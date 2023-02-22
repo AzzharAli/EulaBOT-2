@@ -4,4 +4,5 @@ BOT Whatsapp menggunakan library whatsapp-web.js
 BOT bisa dipakai di https://wa.me/6285158244806
 semua fitur gratis selama server menyala
 
-code hanya ditest di windows 10 dan windows server 2022R2
+tested : Windows 10, Windows Server 2012 R2, Ubuntu 22.04 (server & desktop)
+nodejs 18.xx
