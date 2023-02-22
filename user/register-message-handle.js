@@ -31,6 +31,8 @@
             }else{
                 if(lowerIsiPesan.includes("nama") || lowerIsiPesan.includes("name") || lowerIsiPesan.includes("jeneng")){
                     message.reply("Hey tulis nama kamu aja jangan malah nulis yang lain");
+                }else if(lowerIsiPesan == "menu"){
+                    message.reply("Hey anda register disuruh nulis nama malah nulis menu, bego lu!");
                 }else if(lowerIsiPesan.includes("manusia") || lowerIsiPesan == "wong" || lowerIsiPesan.includes("orang")){
                     message.reply("Iya tau kamu emang "+isiPesan+" tapi kamu punya nama kan cepet kasi tau!");
                 }else if(lowerIsiPesan.includes("tanya") || lowerIsiPesan.includes("kepo") || lowerIsiPesan.includes("nanya")){
@@ -57,6 +59,8 @@
                     message.reply("yaudah aku batalin registrasinya!");
                     chat.sendMessage("Deleting userdata "+nomor);
                     await registerSessionHandle.deleteSessionRegister(nomor);
+                }else if(message.hasMedia){
+                    message.reply("ditanyain nama malah ngirim gituan, goblok lu");
                 }else{
                     if(isiPesan.includes(trigger)){
                         nama = isiPesan.replaceAll(trigger,"")
@@ -149,7 +153,9 @@
                 }else if(lowerIsiPesan.includes("cok ") || lowerIsiPesan.includes(" cok") || lowerIsiPesan.includes("kontol") || lowerIsiPesan.includes("bangsat") || lowerIsiPesan.includes("tempek") || lowerIsiPesan.includes("anjing")){
                     message.reply("Gausah Ngegas Cok, aku tanya hobi loh!");
                 }else if(lowerIsiPesan.includes("hobi")){
-                    message.reply("Iya langsung tulis aja h!");
+                    message.reply("Iya langsung tulis aja hobinya!");
+                }else if(message.hasMedia){
+                    message.reply("goblok, ditanya hobi malah kirim ngawur");
                 }else{
                     message.reply("Jadi hobimu "+isiPesan);
                     await registerSessionHandle.completingHobi(nomor, isiPesan);

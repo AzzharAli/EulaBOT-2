@@ -1,6 +1,6 @@
 const { ChatTypes, Buttons } = require("whatsapp-web.js");
 const menfessSessionHandle = require("./menfess-session-handle");
-const menfessMessageHandle = async(client, message, status) => {
+const menfessMessageHandle = async(eula, message, status) => {
     const {namaBot, owner, nomorOwner, trigger} = require("../../pengaturan.json");
     const chat = await message.getChat();
     const kontak = await message.getContact();
@@ -17,8 +17,8 @@ const menfessMessageHandle = async(client, message, status) => {
                 chat.sendMessage("Mau Chat ke Siapa?? tulis nomornya ya!!\n\nSalah : 0895395391276 \nSalah : +62895395391278\nBenar : 62895395391278");
                 await menfessSessionHandle.setTrueAmbilData(nomor);
             }else{
-                if(Array.from(isiPesan)[0] == "6"){
-                    const nomorPenerima = isiPesan.replaceAll("-","").replaceAll(" ","");
+                if(parseFloat(isiPesan) == isiPesan){
+                    const nomorPenerima = isiPesan.replaceAll("-","").replaceAll(" ","").replaceAll("+","");
                     const cekSesiPengirim = await menfessSessionHandle.cekDariPengirim(nomorPenerima);
                     const cekSesiPenerima = await menfessSessionHandle.cekDariPenerima(nomorPenerima);
                     if(cekSesiPenerima == false && cekSesiPengirim == false){
@@ -29,8 +29,14 @@ const menfessMessageHandle = async(client, message, status) => {
                             chat.sendMessage("langsung ketik aja ya namanya!!")
                         }
                     }else{
-                        chat.sendMessage("*"+namaBot+"*\nNomor Sedang dalam sesi dengan orang lain! Silahkan coba lagi beberapa saat");
-                        await menfessSessionHandle.deleteSession(nomor);
+                        if(nomorPenerima == nomor){
+                            message.reply("*"+namaBot+"*\n\nIni nomor anda woi!");
+                        }else if(nomorPenerima == eula.info.wid.user){
+                            message.reply("*"+namaBot+"*\n\nIni nomor BOT goblok!");
+                        }else{
+                            chat.sendMessage("*"+namaBot+"*\nNomor Sedang dalam sesi dengan orang lain! Silahkan coba lagi beberapa saat");
+                            await menfessSessionHandle.deleteSession(nomor);
+                        }
                     }
                 }else{
                     chat.sendMessage("Cara Masukin Nomornya Salah");
@@ -56,18 +62,19 @@ const menfessMessageHandle = async(client, message, status) => {
                     const stopMenfess = await menfessSessionHandle.deleteSession(nomor);
                     if(stopMenfess == true){
                         chat.sendMessage("*"+namaBot+"*\nSesi Berakhir!");
-                        client.sendMessage(dataMenfess['nomorPenerima']+"@c.us","*"+namaBot+"*\nSesi Diakhiri!");
+                        eula.sendMessage(dataMenfess['nomorPenerima']+"@c.us","*"+namaBot+"*\nSesi Diakhiri!");
                     }
                 }else{
                     const sendnum = dataMenfess['nomorPenerima']+"@c.us";
                     const cekFirstMessage = await menfessSessionHandle.cekStatusFirstMessage(nomor);
                     if(cekFirstMessage == true){
                         let button = new Buttons('Hai, Anda mendapatkan pesan dari '+cekNamaPengirim+" : "+isiPesan,[{body:trigger+'balas'},{body:trigger+'stop'}],namaBot,"Tekan "+trigger+"balas untuk membalas dan "+trigger+"stop untuk mengakhiri");
-                        client.sendMessage(sendnum, button);
+                        eula.sendMessage(sendnum, button);
                         await menfessSessionHandle.setFalseFirstMessage(nomor);
                         await menfessSessionHandle.setFalseAmbilData(nomor);
                     }else{
-                        client.sendMessage(sendnum, isiPesan);
+                        message.forward(sendnum);
+                        //eula.sendMessage(sendnum, isiPesan);
                     }
                 }
             }
@@ -86,7 +93,7 @@ const menfessMessageHandle = async(client, message, status) => {
                 const stop = await menfessSessionHandle.deleteSession(dataMenfess['nomorPengirim']);
                 if(stop == true){
                     chat.sendMessage("*"+namaBot+"*\nSesi Berakhir!");
-                    client.sendMessage(dataMenfess['nomorPengirim']+"@c.us","*"+namaBot+"*\nSesi diakhiri oleh penerima!");
+                    eula.sendMessage(dataMenfess['nomorPengirim']+"@c.us","*"+namaBot+"*\nSesi diakhiri oleh penerima!");
                 }
             }else{
 
@@ -96,10 +103,11 @@ const menfessMessageHandle = async(client, message, status) => {
                 const stop = await menfessSessionHandle.deleteSession(dataMenfess['nomorPengirim']);
                 if(stop == true){
                     chat.sendMessage("*"+namaBot+"*\nSesi Berakhir!");
-                    client.sendMessage(dataMenfess['nomorPengirim']+"@c.us","*"+namaBot+"*\nSesi diakhiri oleh penerima!");
+                    eula.sendMessage(dataMenfess['nomorPengirim']+"@c.us","*"+namaBot+"*\nSesi diakhiri oleh penerima!");
                 }
             }else{
-                client.sendMessage(dataMenfess['nomorPengirim']+"@c.us",isiPesan);
+                message.forward(dataMenfess['nomorPengirim']+"@c.us")
+                //eula.sendMessage(dataMenfess['nomorPengirim']+"@c.us",isiPesan);
             }
         }
         
